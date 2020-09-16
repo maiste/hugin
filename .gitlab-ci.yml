@@ -1,0 +1,4 @@
+image: "rust:1.46.0"
+
+build:hugin:
+  script: cargo build
