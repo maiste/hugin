@@ -1,7 +1,10 @@
 /// This Source Code Form is subject to the terms of the Mozilla Public
 /// License, v. 2.0. If a copy of the MPL was not distributed with this
 /// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+mod rest;
+
 use clap::{App, Arg};
+use rest::server;
 
 fn main() {
     let version_id = "0.1.0";
@@ -31,6 +34,7 @@ fn main() {
                 .value_of("port")
                 .unwrap();
             println!("Execute server right now on port {}!", port);
+            server::run(String::from(port)).expect("Server failed!");
         }
         None => println!("I'm Hugin, a REST Server for the Vanir project."),
         _ => println!("Unknown command, sorry..."),
