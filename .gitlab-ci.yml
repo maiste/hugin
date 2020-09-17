@@ -1,0 +1,16 @@
+image: "rust:1.46.0"
+
+stages:
+  - build
+  - test
+
+build:hugin:
+  stage: build
+  script:
+    - rustc --version && cargo --version
+    - cargo build
+
+test:hugin:
+  stage: test
+  script:
+    - cargo test
