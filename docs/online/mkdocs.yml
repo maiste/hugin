@@ -1,0 +1,13 @@
+site_name: Hugin Developers Documentation
+
+theme:
+  name: material
+
+nav:
+  - 'Home': 'index.md'
+  - 'Tests':
+    - 'Integration': 'tests/integration.md'
+    - 'Unit': 'tests/unit.md'
+  - 'Cli':
+    - 'How to run': 'cli/app.md'
+  - 'License': 'license.md'
