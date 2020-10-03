@@ -1,4 +1,11 @@
-# Feature request 🚀
+---
+name: Feature request
+about: Suggest an idea for this project
+title: "[Feature]"
+labels: feature
+assignees: ''
+
+---
 
 ## Description
 Please describe the problem you are trying to solve.
@@ -8,4 +15,3 @@ Please describe the desired behavior.
 
 ## Alternative
 Please describe alternative solutions or features you have considered. It's an optional field.
-
