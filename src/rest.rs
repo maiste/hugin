@@ -6,3 +6,6 @@ pub mod server;
 mod config;
 pub use config::get_config;
 pub use config::set_config;
+
+mod finder;
+pub use finder::get_json_as_string;
