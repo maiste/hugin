@@ -3,6 +3,9 @@
 /// file, You can obtain one at https://mozilla.org/MPL/2.0/.
 use actix_web::{body::Body, get, guard, web, App, HttpResponse, HttpServer, Responder};
 
+// Import from crate
+use crate::rest::get_json_as_string;
+
 #[get("/test")]
 pub async fn test() -> impl Responder {
     let content = String::from("{ \"test\":\"OK\"}");
@@ -12,13 +15,18 @@ pub async fn test() -> impl Responder {
         .body(body)
 }
 
-#[get("/{name}")]
+#[get("/json/{name}")]
 async fn json_loader(web::Path(name): web::Path<String>) -> impl Responder {
-    let content = String::from(format!("{{ \"name\" : \"{}\" }}", name));
-    let body = Body::from(content);
-    HttpResponse::Ok()
-        .content_type("application/json")
-        .body(body)
+    let content_opt = get_json_as_string(name);
+    match content_opt {
+        Some(content) => {
+            let body = Body::from(content);
+            HttpResponse::Ok()
+                .content_type("application/json")
+                .body(body)
+        }
+        None => HttpResponse::NotFound().finish(),
+    }
 }
 
 #[actix_web::main]

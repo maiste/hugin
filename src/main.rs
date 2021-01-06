@@ -1,10 +1,14 @@
 /// This Source Code Form is subject to the terms of the Mozilla Public
 /// License, v. 2.0. If a copy of the MPL was not distributed with this
 /// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+#[macro_use]
+extern crate lazy_static;
 mod rest;
 
 use clap::{App, Arg};
 use rest::server;
+use std::process::exit;
 
 fn main() {
     let version_id = "0.1.0";
@@ -22,6 +26,13 @@ fn main() {
                         .short("p")
                         .long("port")
                         .default_value("8080"),
+                )
+                .arg(
+                    Arg::with_name("directory")
+                        .help("Change the directory where to look for JSON.")
+                        .short("d")
+                        .long("dir")
+                        .default_value("content"),
                 ),
         )
         .get_matches();
@@ -33,6 +44,19 @@ fn main() {
                 .unwrap()
                 .value_of("port")
                 .unwrap();
+            let directory = matches
+                .subcommand_matches("run")
+                .unwrap()
+                .value_of("directory")
+                .unwrap();
+            let is_set = rest::set_config(&String::from(directory));
+            match is_set {
+                Some(()) => (),
+                None => {
+                    println!("Can't set repository, exit!)");
+                    exit(1)
+                }
+            }
             println!("Execute server right now on port {}!", port);
             server::run(String::from(port)).expect("Server failed!");
         }
