@@ -31,7 +31,7 @@ async fn json_loader(web::Path(name): web::Path<String>) -> impl Responder {
 
 #[actix_web::main]
 pub async fn run(port: String) -> std::io::Result<()> {
-    let addr = format!("localhost:{}", port);
+    let addr = format!("0.0.0.0:{}", port);
     HttpServer::new(|| {
         App::new()
             .default_service(

@@ -1,0 +1,20 @@
+name: Continuous Integration - Hugin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout on current branch
+        uses: actions/checkout@v2
+      - name: Check build
+        run:  cargo build
+      - name: Run test
+        run: RUST_TEST_TASKS=1  cargo test

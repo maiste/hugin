@@ -35,11 +35,12 @@ mod tests {
     #[test]
     fn test_wrong_set_config() {
         let new_path = String::from("path");
-        assert_eq!("content", super::get_config());
+        let old_path = super::get_config();
         match super::set_config(&new_path) {
             None => assert!(true),
             Some(()) => assert!(false),
         };
+        assert_eq!(old_path, super::get_config());
     }
 
     #[test]
@@ -48,7 +49,6 @@ mod tests {
             Some(str) => String::from(str),
             None => String::from("failed path"),
         };
-        assert_eq!("content", super::get_config());
         match super::set_config(&new_path) {
             None => assert!(false),
             Some(()) => assert!(true),
