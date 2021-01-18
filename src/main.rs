@@ -11,7 +11,7 @@ use rest::server;
 use std::process::exit;
 
 fn main() {
-    let version_id = "0.1.0";
+    let version_id = "0.2.0";
     let matches = App::new("hugin")
         .version(version_id)
         .author("Étienne Marais <etienne@maiste.fr>")
