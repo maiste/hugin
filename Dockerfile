@@ -13,7 +13,7 @@ RUN cargo build --release
 # Create light image with exec only
 FROM alpine:3.12
 ARG APP=/app
-LABEL maintainer="Étienne \"maiste\" Marais <etiennemarais@maiste.fr>"
+LABEL maintainer="Étienne \"maiste\" Marais <etienne@maiste.fr>"
 ENV APP_USER=app
 RUN addgroup -S $APP_USER\
     && adduser -S -g $APP_USER $APP_USER
